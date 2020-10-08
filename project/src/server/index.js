@@ -1,4 +1,7 @@
 require('dotenv').config()
+// Immutable
+const { Map } = require('immutable')
+
 const express = require('express')
 const bodyParser = require('body-parser')
 const fetch = require('node-fetch')
@@ -12,9 +15,23 @@ app.use(bodyParser.json())
 
 app.use('/', express.static(path.join(__dirname, '../public')))
 
-// your API calls
+// NASA API call
+app.get('/nasaAPI', async (req, res) => {
+    try {
+        let roverName = req.get('roverName')
+        let roverImage = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/photos?sol=1000&api_key=${process.env.API_KEY}`)
+    } catch (err) {
+        console.log('error:', err);
+    }
+})
+
+
+app.listen(port, () => console.log(`App listening on port ${port}!`))
+
+
 
 // example API call
+/*
 app.get('/apod', async (req, res) => {
     try {
         let image = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.API_KEY}`)
@@ -25,4 +42,6 @@ app.get('/apod', async (req, res) => {
     }
 })
 
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+*/
