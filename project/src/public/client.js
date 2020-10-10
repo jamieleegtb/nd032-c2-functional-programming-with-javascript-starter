@@ -92,9 +92,19 @@ const ImageOfTheDay = (apod) => {
 }
 
 // ------------------------------------------------------  API CALLS
+// NASA ROVER API CALL
+const getRover = (rover) => {
+  fetch(`http://localhost:3000/rover/${rover}`)
+    .then((res) => res.json())
+    .then((roverData) => {
+      console.log(roverData)
+      updateStore(store, {roverData})
+    })
+}
+
 
 // Example API call
-const getImageOfTheDay = (state) => {
+/*const getImageOfTheDay = (state) => {
     let { apod } = state
 
     fetch(`http://localhost:3000/apod`)
@@ -102,4 +112,4 @@ const getImageOfTheDay = (state) => {
         .then(apod => updateStore(store, { apod }))
 
     return data
-}
+}*/
