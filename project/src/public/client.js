@@ -9,7 +9,7 @@ const store = Immutable.Map({
 const root = document.getElementById('root')
 
 const updateStore = (store, newState) => {
-    store = Object.assign(store, newState)
+    store = store.merge(newState)
     render(root, store)
 }
 
@@ -25,7 +25,6 @@ const App = (state) => {
     return `
         <header></header>
         <main>
-            ${Greeting(store.user.name)}
             <section>
                 <h3>Put things on the page!</h3>
                 <p>Here is an example section.</p>
@@ -37,7 +36,6 @@ const App = (state) => {
                     explanation are returned. These keywords could be used as auto-generated hashtags for twitter or instagram feeds;
                     but generally help with discoverability of relevant imagery.
                 </p>
-                ${ImageOfTheDay(apod)}
             </section>
         </main>
         <footer></footer>
@@ -51,8 +49,48 @@ window.addEventListener('load', () => {
 
 // ------------------------------------------------------  COMPONENTS
 
+// ------------------------------------------------- HELPERS
+// Create links
+function addRoverLinks() {
+  return `
+    <nav>
+      <ul>
+        ${store
+          .get('roverOptions')
+          .map((rover) => roverButon(rover))
+          .join('')}
+      </ul>
+    </nav>
+  `
+}
 
+// Link click event
+function callLink(link) {
+  store = store.set('link', link)
+  getRover(store.get('rover'))
+}
 
+// ------------------------------------------------------
+
+// Create Button
+function roverButton(name) {
+  return `
+    <li>
+      <button onclick="callRover('${String(name)}')">
+        ${name.toUpperCase()}
+      </button>
+    </li>
+  `
+}
+
+// Button click event
+function callRover(rover) {
+  store = store.set('rover', rover);
+  getRover(store.get('rover'))
+  render(root, store)
+}
+
+// ------------------------------------------------------
 
 
 // ------------------------------------------------------  API CALLS
