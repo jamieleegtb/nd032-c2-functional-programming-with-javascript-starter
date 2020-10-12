@@ -23,19 +23,24 @@ const App = (state) => {
     let { rovers, apod } = state
 
     return `
-        <header></header>
+        <header>RECENT MARS IMAGES</header>
         <main>
             <section>
-                <h3>Put things on the page!</h3>
-                <p>Here is an example section.</p>
-                <p>
-                    One of the most popular websites at NASA is the Astronomy Picture of the Day. In fact, this website is one of
-                    the most popular websites across all federal agencies. It has the popular appeal of a Justin Bieber video.
-                    This endpoint structures the APOD imagery and associated metadata so that it can be repurposed for other
-                    applications. In addition, if the concept_tags parameter is set to True, then keywords derived from the image
-                    explanation are returned. These keywords could be used as auto-generated hashtags for twitter or instagram feeds;
-                    but generally help with discoverability of relevant imagery.
-                </p>
+                ${addRoverLinks()}
+                <h1>${state.get('rover')}</h1>
+                <div>
+                ${
+                  state.get('roverData') &&
+                  state
+                    .get('roverData')
+                    .get('data')
+                    .get('photos')
+                    .toArray()
+                    .slice(0, 10)
+                    .map((rovers) => createRoverContent(rovers))
+                    .join('')
+                }
+                </div>
             </section>
         </main>
         <footer></footer>
@@ -54,10 +59,10 @@ window.addEventListener('load', () => {
 function addRoverLinks() {
   return `
     <nav>
-      <ul>
+      <ul id="roverLinks">
         ${store
           .get('roverOptions')
-          .map((rover) => roverButon(rover))
+          .map((rover) => roverButton(rover))
           .join('')}
       </ul>
     </nav>
@@ -67,7 +72,7 @@ function addRoverLinks() {
 // Link click event
 function callLink(link) {
   store = store.set('link', link)
-  getRover(store.get('rover'))
+  getRover(store)
 }
 
 // ------------------------------------------------------
@@ -75,8 +80,8 @@ function callLink(link) {
 // Create Button
 function roverButton(name) {
   return `
-    <li>
-      <button onclick="callRover('${String(name)}')">
+    <li class="roverList">
+      <button class="roverBtn" onclick="callRover('${String(name)}')">
         ${name.toUpperCase()}
       </button>
     </li>
@@ -85,8 +90,9 @@ function roverButton(name) {
 
 // Button click event
 function callRover(rover) {
-  store = store.set('rover', rover);
+  store = store.set('rover', rover)
   getRover(store.get('rover'))
+  console.log('Call rover')
   render(root, store)
 }
 
