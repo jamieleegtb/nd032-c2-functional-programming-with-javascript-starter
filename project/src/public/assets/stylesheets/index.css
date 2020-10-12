@@ -49,7 +49,7 @@ main {
   background-color: #111111;
 }
 
-.rvrHeader {text-align: center; margin: 20px; display: none;}
+.rvrHeader {text-align: center; margin: 20px;}
 
 .rvrContainer {
   display: grid;

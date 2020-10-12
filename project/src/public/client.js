@@ -25,7 +25,7 @@
           <main>
               <section>
                   ${addRoverLinks()}
-                  <h1 class="rvrHeader">${state.get('rover').toUpperCase()} IMAGES</h1>
+                  <h1 class="rvrHeader">${state.get('rover').toUpperCase()}</h1>
                   <div class="rvrContainer">
                   ${
                     state.get('roverData') &&
@@ -92,9 +92,6 @@
     getRover(store.get('rover'))
     console.log('Call rover')
     render(root, store)
-
-    const rvrHeader = document.getElementsByClassName('rvrHeader');
-    rvrHeader[0].style.display = "block";
   }
 
   // ------------------------------------------------------
@@ -109,6 +106,8 @@
           <li><span class="bold">Landing Date:</span> ${rovers.get('rover').get('landing_date')}</li>
           <li><span class="bold">Launch Date:</span> ${rovers.get('rover').get('launch_date')}</li>
           <li><span class="bold">Status:</span> ${rovers.get('rover').get('status')}</li>
+          <li><span class="bold">Martian Sol:</span> ${rovers.get('rover').get('max_sol')}</li>
+          <li><span class="bold">Earth Date:</span> ${rovers.get('rover').get('max_date')}</li>
         </ul>
       </div>
     `
