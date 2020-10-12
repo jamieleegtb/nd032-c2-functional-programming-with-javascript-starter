@@ -16,10 +16,32 @@ app.use(bodyParser.json())
 app.use('/', express.static(path.join(__dirname, '../public')))
 
 // NASA API call
-app.get('/nasaAPI', async (req, res) => {
+//curiosity
+app.get('/rover/curiosity', async (req, res) => {
     try {
-        let roverName = req.get('roverName')
-        let image = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}/photos?sol=1000&api_key=${process.env.API_KEY}`)
+        let image = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=${process.env.API_KEY}`)
+          .then(res => res.json())
+        res.send({image})
+    } catch (err) {
+        console.log('error:', err);
+    }
+})
+
+//opportunity
+app.get('/rover/opportunity', async (req, res) => {
+    try {
+        let image = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/opportunity/photos?sol=1000&api_key=${process.env.API_KEY}`)
+          .then(res => res.json())
+        res.send({image})
+    } catch (err) {
+        console.log('error:', err);
+    }
+})
+
+//spirit
+app.get('/rover/spirit', async (req, res) => {
+    try {
+        let image = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/spirit/photos?sol=1000&api_key=${process.env.API_KEY}`)
           .then(res => res.json())
         res.send({image})
     } catch (err) {
