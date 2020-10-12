@@ -26,16 +26,16 @@ main {
 }
 
 /* Rover Links & Buttons */
-#roverLinks{
+#rvrLinks{
   list-style-type: none;
-  margin: 0;
+  margin: 0 0 32px 0;
   padding: 0;
   overflow: hidden;
   background-color: #333333;
   text-align: center;
 }
-.roverList{display: inline-block;}
-.roverBtn {
+.rvrList{display: inline-block;}
+.rvrBtn {
   display: block;
   color: white;
   text-align: center;
@@ -45,11 +45,35 @@ main {
   cursor: pointer;
   border: none;
 }
-.roverBtn:hover, .roverBtn:visited, .roverBtn:focus, .roverBtn:active{
+.rvrBtn:hover, .rvrBtn:visited, .rvrBtn:focus, .rvrBtn:active{
   background-color: #111111;
 }
 
 .rvrHeader {text-align: center; margin: 20px; display: none;}
+
+.rvrContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 300px);
+  grid-gap: 20px;
+  justify-content: center;
+}
+.rvrItem {
+  max-width: 300px;
+  margin: 16px;
+}
+.rvrImg {
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+  border: 2px solid #934838;
+}
+.rvrInfoContainer {
+  margin: 8px;
+}
+
+.bold {
+  font-weight: bold;
+}
 
 footer {
   /* footer styles */

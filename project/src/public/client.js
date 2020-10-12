@@ -2,8 +2,8 @@
       rover: '',
       roverOptions: ['curiosity', 'opportunity', 'spirit'],
       roverData: '',
-      roverLink: ''
-  });
+      roverLink: '',
+  })
 
   // add our markup to the page
   const root = document.getElementById('root')
@@ -57,7 +57,7 @@
   function addRoverLinks() {
     return `
       <nav>
-        <ul id="roverLinks">
+        <ul id="rvrLinks">
           ${store
             .get('roverOptions')
             .map((rover) => roverButton(rover))
@@ -69,7 +69,7 @@
 
   // Link click event
   function callLink(roverLink) {
-    store = store.set('roverLink', roverLink)
+    store = store.set('rvrLink', roverLink)
     getRover(store)
   }
 
@@ -78,8 +78,8 @@
   // Create Button
   function roverButton(name) {
     return `
-      <li class="roverList">
-        <button class="roverBtn" onclick="callRover('${String(name)}')">
+      <li class="rvrList">
+        <button class="rvrBtn" onclick="callRover('${String(name)}')">
           ${name.toUpperCase()}
         </button>
       </li>
@@ -105,10 +105,10 @@
       <div class="rvrItem">
         <img class="rvrImg" src="${rovers.get('img_src')}">
         <ul class="rvrInfoContainer">
-          <li>Photo ID: ${rovers.get('id')}</li>
-          <li>Landing Date: ${rovers.get('rover').get('landing_date')}</li>
-          <li>Launch Date: ${rovers.get('rover').get('launch_date')}</li>
-          <li>Status: ${rovers.get('rover').get('status')}</li>
+          <li><span class="bold">Photo ID:</span> ${rovers.get('id')}</li>
+          <li><span class="bold">Landing Date:</span> ${rovers.get('rover').get('landing_date')}</li>
+          <li><span class="bold">Launch Date:</span> ${rovers.get('rover').get('launch_date')}</li>
+          <li><span class="bold">Status:</span> ${rovers.get('rover').get('status')}</li>
         </ul>
       </div>
     `
@@ -120,8 +120,6 @@
     fetch(`http://localhost:3000/rover/${roverName}`)
       .then((res) => res.json())
       .then((roverData) => { updateStore(store, {roverData}) })
-
-      console.log(store.roverData);
   }
 
 
