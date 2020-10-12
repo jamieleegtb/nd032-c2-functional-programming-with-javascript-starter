@@ -92,6 +92,20 @@ function callRover(rover) {
 
 // ------------------------------------------------------
 
+// Create rover content
+function createRoverContent(rovers) {
+  return`
+    <div>
+      <img src="${rovers.get('img_src')}">
+      <ul>
+        <li>Photo ID: ${rovers.get('id')}</li>
+        <li>Landing Date: ${rovers.get('rover').get('landing_date')}</li>
+        <li>Launch Date: ${rovers.get('rover').get('launch_date')}</li>
+        <li>Status: ${rovers.get('rover').get('status')}</li>
+      </ul>
+    </div>
+  `
+}
 
 // ------------------------------------------------------  API CALLS
 // NASA ROVER API CALL
