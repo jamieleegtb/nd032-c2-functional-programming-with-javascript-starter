@@ -1,8 +1,8 @@
   let store = Immutable.Map({
-      rover:'',
+      rover: '',
       roverOptions: ['curiosity', 'opportunity', 'spirit'],
       roverData: '',
-      roverLink:''
+      roverLink: ''
   });
 
   // add our markup to the page
@@ -20,14 +20,12 @@
 
   // create content
   const App = (state) => {
-      let { rovers, apod } = state
-
       return `
           <header>RECENT MARS IMAGES</header>
           <main>
               <section>
                   ${addRoverLinks()}
-                  <h1 class="rvrHeader">${state.get('rover')}</h1>
+                  <h1 class="rvrHeader">${state.get('rover').toUpperCase()} IMAGES</h1>
                   <div class="rvrContainer">
                   ${
                     state.get('roverData') &&
@@ -70,8 +68,8 @@
   }
 
   // Link click event
-  function callLink(link) {
-    store = store.set('link', link)
+  function callLink(roverLink) {
+    store = store.set('roverLink', roverLink)
     getRover(store)
   }
 
@@ -94,6 +92,9 @@
     getRover(store.get('rover'))
     console.log('Call rover')
     render(root, store)
+
+    const rvrHeader = document.getElementsByClassName('rvrHeader');
+    rvrHeader[0].style.display = "block";
   }
 
   // ------------------------------------------------------
@@ -115,10 +116,12 @@
 
   // ------------------------------------------------------  API CALLS
   // NASA ROVER API CALL
-  const getRover = (rover) => {
-    fetch(`http://localhost:3000/rover/${rover}`)
+  const getRover = (roverName) => {
+    fetch(`http://localhost:3000/rover/${roverName}`)
       .then((res) => res.json())
       .then((roverData) => { updateStore(store, {roverData}) })
+
+      console.log(store.roverData);
   }
 
 

@@ -49,22 +49,24 @@ main {
   background-color: #111111;
 }
 
+.rvrHeader {text-align: center; margin: 20px; display: none;}
+
 footer {
   /* footer styles */
 }
 
 /* -------------------  TABLET  --------------------- */
 @media (min-width: 768px) {
-  /* use mobile */
+  header {
+    padding: 75px;
+    font-size: 3em;
+  }
 }
 
 /* -------------------  DESKTOP  -------------------- */
 
 @media (min-width: 1224px) {
-  header {
-    padding: 75px;
-    font-size: 3em;
-  }
+  /* use mobile */
 }
 
 /* -------------------  LARGE SCREENS  -------------- */
